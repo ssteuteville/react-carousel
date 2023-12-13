@@ -25,6 +25,7 @@
     "build": "tsup",
     "lint": "eslint ./src",
     "lint:fix": "npm run lint --fix",
+    "changeset": "changeset",
     "ci:publish": "pnpm publish --access=public",
     "ci:version": "pnpm changeset version"
   },

@@ -1,5 +1,11 @@
 # @steute.dev/react-carousel
 
+## 0.2.4
+
+### Patch Changes
+
+- 0ebaa54: add gh token for gh-pages workflow
+
 ## 0.2.3
 
 ### Patch Changes

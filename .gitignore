@@ -4,3 +4,4 @@ node_modules/
 store/
 .pnpm-store/
 .npmrc
+storybook-static/

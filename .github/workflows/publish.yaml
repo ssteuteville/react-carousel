@@ -27,7 +27,7 @@ jobs:
         with:
           node-version-file: ".nvmrc"
           registry-url: 'https://registry.npmjs.org'
-          cache: 'pnpm'
+          cache: '.pnpm-store'
           cache-dependency-path: pnpm-lock.yaml
       - name: setup pnpm config
         run: pnpm config set store-dir $PNPM_CACHE_FOLDER
@@ -39,6 +39,9 @@ jobs:
         run: pnpm ci:version
       - name: update lockfile version
         run: pnpm install
+      - name: setup git user
+        run: |
+          git config user.name github-actions[bot]
       - name: stage changes
         run: git add .changeset pnpm-lock.yaml package.json CHANGELOG.md
       - name: commit changes

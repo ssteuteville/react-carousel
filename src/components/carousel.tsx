@@ -22,6 +22,7 @@ export interface CarouselProps {
     backButton: any;
   };
   disableNavigation?: boolean;
+  spacing?: number;
 }
 
 export const Carousel: FC<PropsWithChildren<CarouselProps>> = ({
@@ -29,6 +30,7 @@ export const Carousel: FC<PropsWithChildren<CarouselProps>> = ({
   components = { NextButton: DefaultNextButton, BackButton: DefaultBackButton },
   componentProps = {},
   disableNavigation = false,
+  spacing = 1,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { isAtEnd, isAtStart, scrollRight, scrollLeft } =
@@ -37,7 +39,9 @@ export const Carousel: FC<PropsWithChildren<CarouselProps>> = ({
   const { NextButton, BackButton } = components;
   return (
     <CarouselContainer>
-      <CarouselItemsContainer ref={ref}>{children}</CarouselItemsContainer>
+      <CarouselItemsContainer spacing={spacing} ref={ref}>
+        {children}
+      </CarouselItemsContainer>
       {!disableNavigation && (
         <CarouselNavigation
           NextButton={NextButton}

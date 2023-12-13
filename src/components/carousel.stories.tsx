@@ -49,7 +49,9 @@ export const Default: Story = {
       </Carousel>
     </Container>
   ),
-  args: {},
+  args: {
+    spacing: 1,
+  },
 };
 
 export const CustomButtons: Story = {

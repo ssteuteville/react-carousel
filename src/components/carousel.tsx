@@ -1,16 +1,15 @@
-import { useRef } from "react";
-import { useCarouselNavigation } from "../hooks/use-carousel-navigation";
-import { CarouselContainer } from "./carousel.container";
-import { CarouselItemsContainer } from "./carousel-items.container";
+import { CarouselProvider, useCarousel } from "../context";
 import {
   DefaultBackButton,
   DefaultNextButton,
 } from "./default-navigation.button";
 import { CarouselNavigation } from "./carousel.navigation";
+import { CarouselBase } from "./carousel.base";
+import type { CarouselBaseProps } from "./carousel.base";
 import type { ClickableProps } from "./default-navigation.button";
 import type { FC, JSXElementConstructor, PropsWithChildren } from "react";
 
-export interface CarouselProps {
+export interface CarouselProps extends Omit<CarouselBaseProps, "items"> {
   components?: {
     NextButton: JSXElementConstructor<ClickableProps>;
     BackButton: JSXElementConstructor<ClickableProps>;
@@ -22,7 +21,6 @@ export interface CarouselProps {
     backButton: any;
   };
   disableNavigation?: boolean;
-  spacing?: number;
 }
 
 export const Carousel: FC<PropsWithChildren<CarouselProps>> = ({
@@ -32,26 +30,25 @@ export const Carousel: FC<PropsWithChildren<CarouselProps>> = ({
   disableNavigation = false,
   spacing = 1,
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const { isAtEnd, isAtStart, scrollRight, scrollLeft } =
-    useCarouselNavigation(ref);
+  const carouselApi = useCarousel();
+  const { isAtStart, isAtEnd, scrollLeft, scrollRight } =
+    carouselApi.navigation;
 
   const { NextButton, BackButton } = components;
   return (
-    <CarouselContainer>
-      <CarouselItemsContainer spacing={spacing} ref={ref}>
-        {children}
-      </CarouselItemsContainer>
-      {!disableNavigation && (
-        <CarouselNavigation
-          NextButton={NextButton}
-          BackButton={BackButton}
-          onBack={!isAtStart ? scrollLeft : undefined}
-          onNext={!isAtEnd ? scrollRight : undefined}
-          nextButtonProps={componentProps.nextButton}
-          backButtonProps={componentProps.backButton}
-        />
-      )}
-    </CarouselContainer>
+    <CarouselProvider {...carouselApi}>
+      <CarouselBase items={children} spacing={spacing}>
+        {!disableNavigation && (
+          <CarouselNavigation
+            NextButton={NextButton}
+            BackButton={BackButton}
+            onBack={!isAtStart ? scrollLeft : undefined}
+            onNext={!isAtEnd ? scrollRight : undefined}
+            nextButtonProps={componentProps.nextButton}
+            backButtonProps={componentProps.backButton}
+          />
+        )}
+      </CarouselBase>
+    </CarouselProvider>
   );
 };

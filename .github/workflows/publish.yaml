@@ -19,36 +19,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: pnpm/action-setup@v2
         with:
           version: 8
+
       - uses: actions/setup-node@v3
         with:
           node-version-file: ".nvmrc"
           registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
           cache-dependency-path: pnpm-lock.yaml
-      - name: setup pnpm config
-        run: pnpm config set store-dir $PNPM_CACHE_FOLDER
-      - name: install deps
-        run: pnpm install
-      - name: build project
-        run: pnpm build
-      - name: bump version
-        run: pnpm ci:version
-      - name: update lockfile version
-        run: pnpm install
-      - name: setup git user
+
+      - name: stage publish
+        run: |
+          pnpm install
+          pnpm ci:version
+          pnpm install
+          pnpm build
+
+      - name: check in changes
         run: |
           git config user.name github-actions[bot]
-      - name: stage changes
-        run: git add .changeset pnpm-lock.yaml package.json CHANGELOG.md
-      - name: commit changes
-        run: 'git commit -m "chore: bump version"'
-      - name: create and publish
-        uses: changesets/action@v1
-        with:
-          version: pnpm ci:version
-          commit: "chore: update versions"
-          title: "chore: update versions"
-          publish: pnpm ci:publish
+          git add .changeset pnpm-lock.yaml package.json CHANGELOG.md
+          git commit -m "chore: bump version"
+          git push
+
+      - name: publish
+        run: |
+          pnpm ci:publish

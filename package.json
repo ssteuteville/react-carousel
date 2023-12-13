@@ -1,6 +1,6 @@
 {
   "name": "@steute.dev/react-carousel",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "",
   "type": "module",
   "main": "dist/index.cjs",

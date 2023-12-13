@@ -24,7 +24,9 @@
     "build-storybook": "storybook build",
     "build": "tsup",
     "lint": "eslint ./src",
-    "lint:fix": "npm run lint --fix"
+    "lint:fix": "npm run lint --fix",
+    "ci:publish": "pnpm publish --access=public",
+    "ci:version": "pnpm changeset version"
   },
   "files": [
     "dist",
@@ -46,6 +48,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@changesets/cli": "^2.27.1",
     "@storybook/addon-essentials": "^7.6.4",
     "@storybook/addon-interactions": "^7.6.4",
     "@storybook/addon-links": "^7.6.4",

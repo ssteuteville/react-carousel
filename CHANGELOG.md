@@ -1,5 +1,11 @@
 # @steute.dev/react-carousel
 
+## 0.2.1
+
+### Patch Changes
+
+- 862ea07: add storybook deployment in ci
+
 ## 0.2.0
 
 ### Minor Changes

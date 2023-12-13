@@ -40,7 +40,7 @@
       "esm",
       "cjs"
     ],
-    "outDir": "build"
+    "outDir": "dist"
   },
   "keywords": [],
   "author": "",

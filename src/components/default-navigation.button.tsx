@@ -7,7 +7,7 @@ export interface ClickableProps {
   [key: string]: any;
 }
 
-const DefaultNavigationButton = styled("button")`
+export const DefaultNavigationButton = styled("button")`
   cursor: pointer;
   background: white;
   border-radius: 15px;

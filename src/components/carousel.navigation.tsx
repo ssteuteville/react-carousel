@@ -10,7 +10,9 @@ interface CarouselNavigationProps {
   onNext?: () => void;
   NextButton: JSXElementConstructor<ClickableProps>;
   BackButton: JSXElementConstructor<ClickableProps>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   nextButtonProps?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   backButtonProps?: any;
 }
 

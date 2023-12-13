@@ -16,7 +16,9 @@ export interface CarouselProps {
     BackButton: JSXElementConstructor<ClickableProps>;
   };
   componentProps?: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     nextButton: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     backButton: any;
   };
   disableNavigation?: boolean;

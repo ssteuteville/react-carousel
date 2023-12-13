@@ -3,6 +3,7 @@ import type { FC } from "react";
 
 export interface ClickableProps {
   onClick: () => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
 

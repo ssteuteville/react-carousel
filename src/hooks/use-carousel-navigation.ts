@@ -21,6 +21,10 @@ function getNextElement(list: Array<Element>) {
   return null;
 }
 
+const getChildren = (element: Element) => {
+  return Array.from(element.children);
+};
+
 export const useCarouselNavigation = (ref: RefObject<HTMLDivElement>) => {
   const [prevElement, setPrevElement] = useState<Element | null>(null);
   const [nextElement, setNextElement] = useState<Element | null>(null);
@@ -34,7 +38,7 @@ export const useCarouselNavigation = (ref: RefObject<HTMLDivElement>) => {
     const update = () => {
       const rect = element.getBoundingClientRect();
 
-      const visibleElements = Array.from(element.children).filter((child) => {
+      const visibleElements = getChildren(element).filter((child) => {
         const childRect = child.getBoundingClientRect();
 
         return childRect.left >= rect.left && childRect.right <= rect.right;
@@ -84,10 +88,26 @@ export const useCarouselNavigation = (ref: RefObject<HTMLDivElement>) => {
     [scrollToElement, prevElement],
   );
 
+  const jumpToElement = useCallback(
+    (index: number) => {
+      if (ref.current == null) {
+        return;
+      }
+      const elements = getChildren(ref.current);
+      const element = elements[index];
+      if (!element) {
+        return;
+      }
+
+      scrollToElement(element);
+    },
+    [ref, scrollToElement],
+  );
   return {
     isAtStart: prevElement === null,
     isAtEnd: nextElement === null,
     scrollRight,
     scrollLeft,
+    jumpToElement,
   };
 };

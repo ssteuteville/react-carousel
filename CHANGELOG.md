@@ -1,5 +1,11 @@
 # @steute.dev/react-carousel
 
+## 0.2.2
+
+### Patch Changes
+
+- 51086cd: storybook to gh pages
+
 ## 0.2.1
 
 ### Patch Changes

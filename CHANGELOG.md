@@ -1,5 +1,11 @@
 # @steute.dev/react-carousel
 
+## 0.4.2
+
+### Patch Changes
+
+- 2925191: export navigation mode enum
+
 ## 0.4.1
 
 ### Patch Changes

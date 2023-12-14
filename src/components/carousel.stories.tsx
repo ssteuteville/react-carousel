@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { Carousel } from "./carousel";
+import { CarouselNavigationMode } from "./types";
 import type { FC, PropsWithChildren } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
@@ -71,7 +72,7 @@ export const CustomButtons: Story = {
   },
 };
 
-export const NoNavigation: Story = {
+export const NavigationMode: Story = {
   render: (args) => (
     <Container>
       <Carousel {...args}>
@@ -84,6 +85,6 @@ export const NoNavigation: Story = {
     </Container>
   ),
   args: {
-    disableNavigation: true,
+    navigationMode: CarouselNavigationMode.always,
   },
 };

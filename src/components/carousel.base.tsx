@@ -14,7 +14,7 @@ export const CarouselBase: FC<PropsWithChildren<CarouselBaseProps>> = ({
   children,
 }) => {
   const { containerRef } = useCarouselContext();
-  console.log("aqui", children);
+
   return (
     <CarouselContainer>
       <CarouselItemsContainer spacing={spacing} ref={containerRef}>

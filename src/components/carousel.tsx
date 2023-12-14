@@ -5,6 +5,7 @@ import {
 } from "./default-navigation.button";
 import { CarouselNavigation } from "./carousel.navigation";
 import { CarouselBase } from "./carousel.base";
+import { CarouselNavigationMode } from "./types";
 import type { CarouselBaseProps } from "./carousel.base";
 import type { ClickableProps } from "./default-navigation.button";
 import type { FC, JSXElementConstructor, PropsWithChildren } from "react";
@@ -20,38 +21,29 @@ export interface CarouselProps extends Omit<CarouselBaseProps, "items"> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     backButton: any;
   };
-  disableNavigation?: boolean;
-  alwaysShowNavigation?: boolean;
+  navigationMode?: CarouselNavigationMode;
 }
 
 export const Carousel: FC<PropsWithChildren<CarouselProps>> = ({
   children,
   components = { NextButton: DefaultNextButton, BackButton: DefaultBackButton },
   componentProps = {},
-  disableNavigation = false,
   spacing = 1,
-  alwaysShowNavigation,
+  navigationMode = CarouselNavigationMode.hover,
 }) => {
   const carouselApi = useCarousel();
-  const { isAtStart, isAtEnd, scrollLeft, scrollRight } =
-    carouselApi.navigation;
 
   const { NextButton, BackButton } = components;
   return (
     <CarouselProvider {...carouselApi}>
       <CarouselBase items={children} spacing={spacing}>
-        {!disableNavigation && (
-          <CarouselNavigation
-            NextButton={NextButton}
-            BackButton={BackButton}
-            onBack={scrollLeft}
-            onNext={scrollRight}
-            showNext={alwaysShowNavigation || !isAtEnd}
-            showBack={alwaysShowNavigation || !isAtStart}
-            nextButtonProps={componentProps.nextButton}
-            backButtonProps={componentProps.backButton}
-          />
-        )}
+        <CarouselNavigation
+          NextButton={NextButton}
+          BackButton={BackButton}
+          nextButtonProps={componentProps.nextButton}
+          backButtonProps={componentProps.backButton}
+          mode={navigationMode}
+        />
       </CarouselBase>
     </CarouselProvider>
   );

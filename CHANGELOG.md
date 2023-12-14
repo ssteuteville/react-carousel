@@ -1,5 +1,11 @@
 # @steute.dev/react-carousel
 
+## 0.2.5
+
+### Patch Changes
+
+- 750f157: ClickableProps was not flexible enough
+
 ## 0.2.4
 
 ### Patch Changes

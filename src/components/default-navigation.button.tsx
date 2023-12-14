@@ -1,11 +1,12 @@
 import { styled } from "styled-components";
 import type { FC } from "react";
 
-export interface ClickableProps {
+interface Clickable {
   onClick: () => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type ClickableProps = Clickable & any;
 
 export const DefaultNavigationButton = styled("button")`
   cursor: pointer;

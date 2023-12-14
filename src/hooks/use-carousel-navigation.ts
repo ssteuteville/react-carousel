@@ -54,8 +54,24 @@ export const useCarouselNavigation = (
 
     containerElement.addEventListener("scroll", update, { passive: true });
 
+    const mutationObserver = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        // children added or removed
+        if (mutation.type === "childList") {
+          update();
+        }
+      }
+    });
+
+    mutationObserver.observe(containerElement, { childList: true });
+
+    const resizeObserver = new ResizeObserver(update);
+
+    resizeObserver.observe(containerElement);
     return () => {
       containerElement.removeEventListener("scroll", update);
+      mutationObserver.disconnect();
+      resizeObserver.disconnect();
     };
   }, [containerElement]);
 

@@ -1,5 +1,12 @@
 # @steute.dev/react-carousel
 
+## 0.4.0
+
+### Minor Changes
+
+- ebaf298: - Fix issue with carousel running dynamically
+  - Add navigation mode
+
 ## 0.3.0
 
 ### Minor Changes

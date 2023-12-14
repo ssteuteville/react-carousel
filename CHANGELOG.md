@@ -1,5 +1,11 @@
 # @steute.dev/react-carousel
 
+## 0.4.1
+
+### Patch Changes
+
+- 1cca4ae: navigation state was not correct when the containers children changed
+
 ## 0.4.0
 
 ### Minor Changes

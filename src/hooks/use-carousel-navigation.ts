@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import type { RefObject } from "react";
 
 function getPrevElement(list: Array<Element>) {
   const sibling = list[0]?.previousElementSibling;
@@ -25,20 +24,21 @@ const getChildren = (element: Element) => {
   return Array.from(element.children);
 };
 
-export const useCarouselNavigation = (ref: RefObject<HTMLDivElement>) => {
+export const useCarouselNavigation = (
+  containerElement: HTMLDivElement | null,
+) => {
   const [prevElement, setPrevElement] = useState<Element | null>(null);
   const [nextElement, setNextElement] = useState<Element | null>(null);
 
   useEffect(() => {
-    const element = ref.current;
-    if (!element) {
+    if (!containerElement) {
       return;
     }
 
     const update = () => {
-      const rect = element.getBoundingClientRect();
+      const rect = containerElement.getBoundingClientRect();
 
-      const visibleElements = getChildren(element).filter((child) => {
+      const visibleElements = getChildren(containerElement).filter((child) => {
         const childRect = child.getBoundingClientRect();
 
         return childRect.left >= rect.left && childRect.right <= rect.right;
@@ -52,30 +52,29 @@ export const useCarouselNavigation = (ref: RefObject<HTMLDivElement>) => {
 
     update();
 
-    element.addEventListener("scroll", update, { passive: true });
+    containerElement.addEventListener("scroll", update, { passive: true });
 
     return () => {
-      element.removeEventListener("scroll", update);
+      containerElement.removeEventListener("scroll", update);
     };
-  }, [ref]);
+  }, [containerElement]);
 
   const scrollToElement = useCallback(
     (element: Element | null) => {
-      const currentNode = ref.current;
-
-      if (!currentNode || !element || !(element instanceof HTMLElement)) return;
+      if (!containerElement || !element || !(element instanceof HTMLElement))
+        return;
 
       const newScrollPosition =
         element.offsetLeft +
         element.getBoundingClientRect().width / 2 -
-        currentNode.getBoundingClientRect().width / 2;
+        containerElement.getBoundingClientRect().width / 2;
 
-      currentNode.scroll({
+      containerElement.scroll({
         left: newScrollPosition,
         behavior: "smooth",
       });
     },
-    [ref],
+    [containerElement],
   );
 
   const scrollRight = useCallback(
@@ -90,10 +89,10 @@ export const useCarouselNavigation = (ref: RefObject<HTMLDivElement>) => {
 
   const jumpToElement = useCallback(
     (index: number) => {
-      if (ref.current == null) {
+      if (containerElement == null) {
         return;
       }
-      const elements = getChildren(ref.current);
+      const elements = getChildren(containerElement);
       const element = elements[index];
       if (!element) {
         return;
@@ -101,7 +100,7 @@ export const useCarouselNavigation = (ref: RefObject<HTMLDivElement>) => {
 
       scrollToElement(element);
     },
-    [ref, scrollToElement],
+    [containerElement, scrollToElement],
   );
   return {
     isAtStart: prevElement === null,

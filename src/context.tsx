@@ -1,9 +1,10 @@
-import { createContext, useContext, useRef } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 import { useCarouselNavigation } from "./hooks/use-carousel-navigation";
-import type { FC, PropsWithChildren, RefObject } from "react";
+import type { FC, PropsWithChildren, RefCallback } from "react";
 
 export interface CarouselApi {
-  containerRef: RefObject<HTMLDivElement>;
+  containerRef: RefCallback<HTMLDivElement>;
+  containerElement: HTMLDivElement | null;
   navigation: {
     isAtStart: boolean;
     isAtEnd: boolean;
@@ -14,7 +15,8 @@ export interface CarouselApi {
 }
 
 const carouselContext = createContext<CarouselApi>({
-  containerRef: null as unknown as RefObject<HTMLDivElement>,
+  containerRef: () => {},
+  containerElement: null,
   navigation: {
     isAtStart: false,
     isAtEnd: false,
@@ -25,10 +27,15 @@ const carouselContext = createContext<CarouselApi>({
 });
 
 export const useCarousel = (): CarouselApi => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const navigation = useCarouselNavigation(containerRef);
+  const [containerElement, setContainerElement] =
+    useState<HTMLDivElement | null>(null);
+  const containerRef = useCallback((element: HTMLDivElement | null) => {
+    setContainerElement(element);
+  }, []);
+  const navigation = useCarouselNavigation(containerElement);
 
   return {
+    containerElement,
     containerRef,
     navigation,
   };

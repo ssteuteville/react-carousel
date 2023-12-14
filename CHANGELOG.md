@@ -1,5 +1,11 @@
 # @steute.dev/react-carousel
 
+## 0.3.0
+
+### Minor Changes
+
+- 3c289a7: ability to always show navigation
+
 ## 0.2.5
 
 ### Patch Changes

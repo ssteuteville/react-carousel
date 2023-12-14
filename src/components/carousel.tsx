@@ -21,6 +21,7 @@ export interface CarouselProps extends Omit<CarouselBaseProps, "items"> {
     backButton: any;
   };
   disableNavigation?: boolean;
+  alwaysShowNavigation?: boolean;
 }
 
 export const Carousel: FC<PropsWithChildren<CarouselProps>> = ({
@@ -29,6 +30,7 @@ export const Carousel: FC<PropsWithChildren<CarouselProps>> = ({
   componentProps = {},
   disableNavigation = false,
   spacing = 1,
+  alwaysShowNavigation,
 }) => {
   const carouselApi = useCarousel();
   const { isAtStart, isAtEnd, scrollLeft, scrollRight } =
@@ -42,8 +44,10 @@ export const Carousel: FC<PropsWithChildren<CarouselProps>> = ({
           <CarouselNavigation
             NextButton={NextButton}
             BackButton={BackButton}
-            onBack={!isAtStart ? scrollLeft : undefined}
-            onNext={!isAtEnd ? scrollRight : undefined}
+            onBack={scrollLeft}
+            onNext={scrollRight}
+            showNext={alwaysShowNavigation || !isAtEnd}
+            showBack={alwaysShowNavigation || !isAtStart}
             nextButtonProps={componentProps.nextButton}
             backButtonProps={componentProps.backButton}
           />

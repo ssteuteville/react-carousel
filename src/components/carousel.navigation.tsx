@@ -6,14 +6,16 @@ import type { ClickableProps } from "./default-navigation.button";
 import type { FC, JSXElementConstructor } from "react";
 
 interface CarouselNavigationProps {
-  onBack?: () => void;
-  onNext?: () => void;
+  onBack: () => void;
+  onNext: () => void;
   NextButton: JSXElementConstructor<ClickableProps>;
   BackButton: JSXElementConstructor<ClickableProps>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   nextButtonProps?: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   backButtonProps?: any;
+  showNext: boolean;
+  showBack: boolean;
 }
 
 export const CarouselNavigation: FC<CarouselNavigationProps> = ({
@@ -23,15 +25,17 @@ export const CarouselNavigation: FC<CarouselNavigationProps> = ({
   BackButton,
   nextButtonProps,
   backButtonProps,
+  showNext,
+  showBack,
 }) => {
   return (
     <>
-      {onBack && (
+      {showBack && (
         <LeftButtonContainer>
           <BackButton {...(backButtonProps ?? {})} onClick={() => onBack()} />
         </LeftButtonContainer>
       )}
-      {onNext && (
+      {showNext && (
         <RightButtonContainer>
           <NextButton {...(nextButtonProps ?? {})} onClick={() => onNext()} />
         </RightButtonContainer>

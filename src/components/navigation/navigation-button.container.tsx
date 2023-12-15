@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { CarouselContainer } from "./carousel.container";
+import { CarouselContainer } from "../base/carousel.container";
 
 export const NavigationButtonContainer = styled("div")`
   position: absolute;

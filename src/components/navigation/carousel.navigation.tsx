@@ -1,9 +1,9 @@
-import { useCarouselContext } from "../context";
+import { useCarouselContext } from "../../context";
+import { CarouselNavigationMode } from "../types";
 import {
   LeftButtonContainer,
   RightButtonContainer,
 } from "./navigation-button.container";
-import { CarouselNavigationMode } from "./types";
 import type { ClickableProps } from "./default-navigation.button";
 import type { FC, JSXElementConstructor } from "react";
 

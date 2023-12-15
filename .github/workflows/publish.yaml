@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - .changeset/**/*
   workflow_dispatch:
 
 env:

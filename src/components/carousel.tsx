@@ -2,12 +2,12 @@ import { CarouselProvider, useCarousel } from "../context";
 import {
   DefaultBackButton,
   DefaultNextButton,
-} from "./default-navigation.button";
-import { CarouselNavigation } from "./carousel.navigation";
-import { CarouselBase } from "./carousel.base";
+} from "./navigation/default-navigation.button";
+import { CarouselNavigation } from "./navigation/carousel.navigation";
+import { CarouselBase } from "./base/carousel.base";
 import type { CarouselNavigationMode } from "./types";
-import type { CarouselBaseProps } from "./carousel.base";
-import type { ClickableProps } from "./default-navigation.button";
+import type { CarouselBaseProps } from "./base/carousel.base";
+import type { ClickableProps } from "./navigation/default-navigation.button";
 import type { FC, JSXElementConstructor, PropsWithChildren } from "react";
 
 export interface CarouselProps extends Omit<CarouselBaseProps, "items"> {

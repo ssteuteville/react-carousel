@@ -1,4 +1,4 @@
-import { useCarouselContext } from "../context";
+import { useCarouselContext } from "../../context";
 import { CarouselContainer } from "./carousel.container";
 import { CarouselItemsContainer } from "./carousel-items.container";
 import type { FC, PropsWithChildren, ReactNode } from "react";

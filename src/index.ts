@@ -1,11 +1,11 @@
 export { Carousel } from "./components/carousel";
 export type { CarouselProps } from "./components/carousel";
-export { LeftButtonContainer } from "./components/navigation-button.container";
-export { RightButtonContainer } from "./components/navigation-button.container";
-export { DefaultNextButton } from "./components/default-navigation.button";
-export { DefaultBackButton } from "./components/default-navigation.button";
+export { LeftButtonContainer } from "./components/navigation/navigation-button.container";
+export { RightButtonContainer } from "./components/navigation/navigation-button.container";
+export { DefaultNextButton } from "./components/navigation/default-navigation.button";
+export { DefaultBackButton } from "./components/navigation/default-navigation.button";
 export { CarouselProvider, useCarousel, useCarouselContext } from "./context";
-export { CarouselBase } from "./components/carousel.base";
-export type { CarouselBaseProps } from "./components/carousel.base";
+export { CarouselBase } from "./components/base/carousel.base";
+export type { CarouselBaseProps } from "./components/base/carousel.base";
 export type { CarouselApi } from "./context";
 export { CarouselNavigationMode } from "./components/types";

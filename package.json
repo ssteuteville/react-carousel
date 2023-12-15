@@ -28,7 +28,7 @@
     "changeset": "changeset",
     "ci:publish": "pnpm publish --access=public",
     "ci:version": "pnpm changeset version",
-    "pnpm:devPreinstall": "husky install"
+    "pnpm:devPreinstall": "pnpm dlx husky install"
   },
   "files": [
     "dist",

@@ -8,7 +8,11 @@
   "types": "dist/index.d.ts",
   "release": {
     "branches": [
-      "main"
+      "[0-9]+.x",
+      "main",
+      "next",
+      {"name": "beta", "prerelease": true},
+      {"name": "alpha", "prerelease": true}
     ],
     "plugins": [
       "@semantic-release/commit-analyzer",

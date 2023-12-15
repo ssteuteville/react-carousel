@@ -4,6 +4,12 @@ on:
     workflows: [Publish Package to NPM]
     types:
       - completed
+    branches:
+      - main
+      - next
+      - beta
+      - alpha
+      - '[0-9]+.x'
   workflow_dispatch:
 
 env:

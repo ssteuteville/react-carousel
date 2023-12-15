@@ -1,5 +1,11 @@
 # @steute.dev/react-carousel
 
+## 0.4.3
+
+### Patch Changes
+
+- 3b4e39f: change default for carousel navigation mode
+
 ## 0.4.2
 
 ### Patch Changes

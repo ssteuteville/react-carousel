@@ -27,7 +27,8 @@
     "lint:fix": "npm run lint --fix",
     "changeset": "changeset",
     "ci:publish": "pnpm publish --access=public",
-    "ci:version": "pnpm changeset version"
+    "ci:version": "pnpm changeset version",
+    "pnpm:devPreinstall": "husky install"
   },
   "files": [
     "dist",
@@ -92,5 +93,10 @@
   },
   "resolutions": {
     "styled-components": "^6"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx}": [
+      "pnpm --silent dlx eslint ./src"
+    ]
   }
 }

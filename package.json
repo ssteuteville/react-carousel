@@ -6,6 +6,9 @@
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "release": {
+    "branches": ["main"]
+  },
   "exports": {
     ".": {
       "import": {
@@ -25,9 +28,6 @@
     "build": "tsup",
     "lint": "eslint ./src",
     "lint:fix": "npm run lint --fix",
-    "changeset": "changeset",
-    "ci:publish": "pnpm publish --access=public",
-    "ci:version": "pnpm changeset version",
     "pnpm:devPreinstall": "pnpm dlx husky install"
   },
   "files": [
@@ -50,7 +50,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@changesets/cli": "^2.27.1",
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
     "@storybook/addon-a11y": "^7.6.4",

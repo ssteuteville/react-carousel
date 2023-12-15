@@ -1,26 +1,26 @@
-name: Publish Package to NPM
+name: Publish GH Pages
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - .changeset/**/*
+  workflow_run:
+    workflows: [Publish Package to NPM]
+    types:
+      - completed
   workflow_dispatch:
 
 env:
   CI: true
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  publish:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.build-publish.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: pnpm/action-setup@v2
         with:
           version: 8
@@ -28,10 +28,14 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version-file: ".nvmrc"
-          registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
           cache-dependency-path: pnpm-lock.yaml
-
-      - name: publish
+      - name: build
         run: |
-          pnpm dlx semantic-release
+          pnpm install
+          pnpm build-storybook
+      - name: publish
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./storybook-static

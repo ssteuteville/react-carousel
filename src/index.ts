@@ -9,3 +9,4 @@ export { CarouselBase } from "./components/base/carousel.base";
 export type { CarouselBaseProps } from "./components/base/carousel.base";
 export type { CarouselApi } from "./context";
 export { CarouselNavigationMode } from "./components/types";
+export { useCarouselNavigation } from "./hooks/use-carousel-navigation";

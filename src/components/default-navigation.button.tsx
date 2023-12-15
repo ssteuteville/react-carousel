@@ -54,14 +54,20 @@ export const ArrowRight: FC<{ size?: number; color?: string }> = ({
 );
 export const DefaultBackButton: FC<ClickableProps> = ({ onClick }) => {
   return (
-    <DefaultNavigationButton onClick={onClick}>
+    <DefaultNavigationButton
+      onClick={onClick}
+      aria-label="scroll to previous set of elements"
+    >
       <ArrowLeft />
     </DefaultNavigationButton>
   );
 };
 export const DefaultNextButton: FC<ClickableProps> = ({ onClick }) => {
   return (
-    <DefaultNavigationButton onClick={onClick}>
+    <DefaultNavigationButton
+      onClick={onClick}
+      aria-label="scroll to next set of elements"
+    >
       <ArrowRight />
     </DefaultNavigationButton>
   );

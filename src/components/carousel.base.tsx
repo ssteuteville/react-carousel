@@ -17,7 +17,7 @@ export const CarouselBase: FC<PropsWithChildren<CarouselBaseProps>> = ({
 
   return (
     <CarouselContainer>
-      <CarouselItemsContainer spacing={spacing} ref={containerRef}>
+      <CarouselItemsContainer spacing={spacing} ref={containerRef} tabIndex={0}>
         {items}
       </CarouselItemsContainer>
       {children}

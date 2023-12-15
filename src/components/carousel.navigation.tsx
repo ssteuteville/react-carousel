@@ -30,6 +30,9 @@ export const CarouselNavigation: FC<CarouselNavigationProps> = ({
     return null;
   }
 
+  const backProps = backButtonProps ?? {};
+  const nextProps = nextButtonProps ?? {};
+
   const { isAtStart, isAtEnd, scrollLeft, scrollRight } =
     carouselApi.navigation;
 
@@ -44,12 +47,24 @@ export const CarouselNavigation: FC<CarouselNavigationProps> = ({
     <>
       {(!isAtStart || !isDynamic) && (
         <LeftButtonContainer $isHoverOnly={isHover}>
-          <BackButton {...(backButtonProps ?? {})} onClick={scrollLeft} />
+          <BackButton
+            {...backProps}
+            onClick={() => {
+              backProps.onClick?.();
+              scrollLeft();
+            }}
+          />
         </LeftButtonContainer>
       )}
       {(!isAtEnd || !isDynamic) && (
         <RightButtonContainer $isHoverOnly={isHover}>
-          <NextButton {...(nextButtonProps ?? {})} onClick={scrollRight} />
+          <NextButton
+            {...nextProps}
+            onClick={() => {
+              nextProps.onClick?.();
+              scrollRight();
+            }}
+          />
         </RightButtonContainer>
       )}
     </>

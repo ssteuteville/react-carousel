@@ -5,7 +5,7 @@ import {
 } from "./default-navigation.button";
 import { CarouselNavigation } from "./carousel.navigation";
 import { CarouselBase } from "./carousel.base";
-import { CarouselNavigationMode } from "./types";
+import type { CarouselNavigationMode } from "./types";
 import type { CarouselBaseProps } from "./carousel.base";
 import type { ClickableProps } from "./default-navigation.button";
 import type { FC, JSXElementConstructor, PropsWithChildren } from "react";
@@ -29,7 +29,7 @@ export const Carousel: FC<PropsWithChildren<CarouselProps>> = ({
   components = { NextButton: DefaultNextButton, BackButton: DefaultBackButton },
   componentProps = {},
   spacing = 1,
-  navigationMode = CarouselNavigationMode.hover,
+  navigationMode,
 }) => {
   const carouselApi = useCarousel();
 

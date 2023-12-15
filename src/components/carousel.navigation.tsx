@@ -22,7 +22,7 @@ export const CarouselNavigation: FC<CarouselNavigationProps> = ({
   BackButton,
   nextButtonProps,
   backButtonProps,
-  mode = "dynamic-hover" as CarouselNavigationMode,
+  mode = CarouselNavigationMode.dynamicHover,
 }) => {
   const carouselApi = useCarouselContext();
 

@@ -32,4 +32,4 @@ jobs:
 
       - name: publish
         run: |
-          pnpm dlx semantic-release
+          pnpm --package=@semantic-release/changelog --package=@semantic-release/git --package=semantic-release@22 dlx semantic-release

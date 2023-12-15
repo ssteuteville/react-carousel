@@ -1,5 +1,11 @@
 # @steute.dev/react-carousel
 
+## 0.4.4
+
+### Patch Changes
+
+- 0907419: onClick should get called when passed as componentProps
+
 ## 0.4.3
 
 ### Patch Changes

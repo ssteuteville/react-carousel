@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { getChildren } from "./get-children";
 
 function getPrevElement(list: Array<Element>) {
   const sibling = list[0]?.previousElementSibling;
@@ -20,16 +21,9 @@ function getNextElement(list: Array<Element>) {
   return null;
 }
 
-const getChildren = (element: Element) => {
-  return Array.from(element.children);
-};
-
-export const useCarouselNavigation = (
-  containerElement: HTMLDivElement | null,
-) => {
+export const useWatchElements = (containerElement: HTMLDivElement | null) => {
   const [prevElement, setPrevElement] = useState<Element | null>(null);
   const [nextElement, setNextElement] = useState<Element | null>(null);
-
   useEffect(() => {
     if (!containerElement) {
       return;
@@ -75,54 +69,8 @@ export const useCarouselNavigation = (
     };
   }, [containerElement]);
 
-  const scrollToElement = useCallback(
-    (element: Element | null) => {
-      if (!containerElement || !element || !(element instanceof HTMLElement))
-        return;
-
-      const newScrollPosition =
-        element.offsetLeft +
-        element.getBoundingClientRect().width / 2 -
-        containerElement.getBoundingClientRect().width / 2;
-
-      containerElement.scroll({
-        left: newScrollPosition,
-        behavior: "smooth",
-      });
-    },
-    [containerElement],
-  );
-
-  const scrollRight = useCallback(
-    () => scrollToElement(nextElement),
-    [scrollToElement, nextElement],
-  );
-
-  const scrollLeft = useCallback(
-    () => scrollToElement(prevElement),
-    [scrollToElement, prevElement],
-  );
-
-  const jumpToElement = useCallback(
-    (index: number) => {
-      if (containerElement == null) {
-        return;
-      }
-      const elements = getChildren(containerElement);
-      const element = elements[index];
-      if (!element) {
-        return;
-      }
-
-      scrollToElement(element);
-    },
-    [containerElement, scrollToElement],
-  );
   return {
-    isAtStart: prevElement === null,
-    isAtEnd: nextElement === null,
-    scrollRight,
-    scrollLeft,
-    jumpToElement,
+    prevElement,
+    nextElement,
   };
 };

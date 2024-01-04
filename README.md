@@ -5,6 +5,9 @@ first way and simplest way, is to use the Carousel component for a caruosel with
 customization options. The second way to use the library is to use building blocks provided by the library to build your
 own custom carousel.
 
+## Storybook
+https://ssteuteville.github.io/react-carousel
+
 ## Carousel Component
 ### Basic Usage
 This example will render a carousel that fills its containers width, and uses default navigation buttons.
@@ -19,6 +22,26 @@ const MyComponent: FC = () => {
   return (
     <div style={{ maxWidth: "500px" }}>
       <Carousel>
+        {exampleData.map((datum) => (<ExampleItem {...datum} key={datum.key} />))}
+      </Carousel>
+    </div>
+  )
+}
+```
+
+### AutoPlay
+```tsx
+import { Carousel } from "@steute.dev/react-carousel";
+import { useExampleData } from "./some-file-of-your-own";
+import { ExampleItem } from "./some-file-of-your-own";
+
+const MyComponent: FC = () => {
+  const exampleData = useExampleData(); // some sort of arrays
+  
+  // this example will auto scroll every 3 seconds
+  return (
+    <div style={{ maxWidth: "500px" }}>
+      <Carousel autoPlay autoPlayInterval={3000}>
         {exampleData.map((datum) => (<ExampleItem {...datum} key={datum.key} />))}
       </Carousel>
     </div>
@@ -85,11 +108,7 @@ const MyComponent: FC = () => {
 ### Usage
 More documentation is on the way, for now read the source code for the `Carousel` component in this project.
 
-## Storybook
-https://ssteuteville.github.io/react-carousel
-
 ## Future Plans
-- auto scrolling
 - better docs
 - unit tests
 - feel free to submit requests with issues

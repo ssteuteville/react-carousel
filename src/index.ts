@@ -1,5 +1,6 @@
 export { Carousel } from "./components/carousel";
 export type { CarouselProps } from "./components/carousel";
+export * from "./hooks";
 export { LeftButtonContainer } from "./components/navigation/navigation-button.container";
 export { RightButtonContainer } from "./components/navigation/navigation-button.container";
 export { DefaultNextButton } from "./components/navigation/default-navigation.button";
@@ -9,4 +10,3 @@ export { CarouselBase } from "./components/base/carousel.base";
 export type { CarouselBaseProps } from "./components/base/carousel.base";
 export type { CarouselApi } from "./context";
 export { CarouselNavigationMode } from "./components/types";
-export { useCarouselNavigation } from "./hooks/use-carousel-navigation";

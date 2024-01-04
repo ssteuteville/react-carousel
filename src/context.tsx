@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useState } from "react";
-import { useCarouselNavigation } from "./hooks/use-carousel-navigation";
+import { useCarouselNavigation } from "./hooks/navigation/use-carousel-navigation";
 import type { FC, PropsWithChildren, RefCallback } from "react";
 
 export interface CarouselApi {
@@ -26,13 +26,24 @@ const carouselContext = createContext<CarouselApi>({
   },
 });
 
-export const useCarousel = (): CarouselApi => {
+export interface UseCarouselOptions {
+  autoPlay?: boolean;
+  autoPlayInterval?: number;
+}
+
+export const useCarousel = ({
+  autoPlay,
+  autoPlayInterval,
+}: UseCarouselOptions = {}): CarouselApi => {
   const [containerElement, setContainerElement] =
     useState<HTMLDivElement | null>(null);
   const containerRef = useCallback((element: HTMLDivElement | null) => {
     setContainerElement(element);
   }, []);
-  const navigation = useCarouselNavigation(containerElement);
+  const navigation = useCarouselNavigation(containerElement, {
+    autoPlay,
+    autoPlayInterval,
+  });
 
   return {
     containerElement,

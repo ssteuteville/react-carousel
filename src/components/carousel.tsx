@@ -22,6 +22,8 @@ export interface CarouselProps extends Omit<CarouselBaseProps, "items"> {
     backButton: any;
   };
   navigationMode?: CarouselNavigationMode;
+  autoPlay?: boolean;
+  autoPlayInterval?: number;
 }
 
 export const Carousel: FC<PropsWithChildren<CarouselProps>> = ({
@@ -30,8 +32,10 @@ export const Carousel: FC<PropsWithChildren<CarouselProps>> = ({
   componentProps = {},
   spacing = 1,
   navigationMode,
+  autoPlay,
+  autoPlayInterval,
 }) => {
-  const carouselApi = useCarousel();
+  const carouselApi = useCarousel({ autoPlay, autoPlayInterval });
 
   const { NextButton, BackButton } = components;
   return (

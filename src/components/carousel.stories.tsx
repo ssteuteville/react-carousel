@@ -2,18 +2,25 @@ import { styled } from "styled-components";
 import { Carousel } from "./carousel";
 import { CarouselNavigationMode } from "./types";
 import type { FC, PropsWithChildren } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-
-const meta: Meta<typeof Carousel> = {
-  component: Carousel,
-};
-
-export default meta;
-type Story = StoryObj<typeof Carousel>;
+import type { Meta, StoryFn, StoryObj } from "@storybook/react";
 
 const Container = styled.div`
   max-width: 900px;
 `;
+
+const wrapWithContainer = (StoryComponent: StoryFn) => (
+  <Container>
+    <StoryComponent />
+  </Container>
+);
+
+const meta: Meta<typeof Carousel> = {
+  component: Carousel,
+  decorators: [wrapWithContainer],
+};
+
+export default meta;
+type Story = StoryObj<typeof Carousel>;
 
 const Item = styled.div<{ width: number; height: number }>`
   display: flex;
@@ -38,17 +45,25 @@ const BackButton: FC<PropsWithChildren<{ onClick: () => void }>> = ({
   return <button onClick={onClick}>back</button>;
 };
 
+export const Playground: Story = {
+  args: {
+    children: Array.from({ length: 15 }).map((_, i) => (
+      <Item width={100} height={200} key={i}>
+        {i}
+      </Item>
+    )),
+  },
+};
+
 export const Default: Story = {
   render: (args) => (
-    <Container>
-      <Carousel {...args}>
-        {Array.from({ length: 15 }).map((_, i) => (
-          <Item width={100} height={200} key={i}>
-            {i}
-          </Item>
-        ))}
-      </Carousel>
-    </Container>
+    <Carousel {...args}>
+      {Array.from({ length: 15 }).map((_, i) => (
+        <Item width={100} height={200} key={i}>
+          {i}
+        </Item>
+      ))}
+    </Carousel>
   ),
   args: {
     spacing: 1,
@@ -57,15 +72,13 @@ export const Default: Story = {
 
 export const CustomButtons: Story = {
   render: (args) => (
-    <Container>
-      <Carousel {...args}>
-        {Array.from({ length: 15 }).map((_, i) => (
-          <Item width={100} height={200} key={i}>
-            {i}
-          </Item>
-        ))}
-      </Carousel>
-    </Container>
+    <Carousel {...args}>
+      {Array.from({ length: 15 }).map((_, i) => (
+        <Item width={100} height={200} key={i}>
+          {i}
+        </Item>
+      ))}
+    </Carousel>
   ),
   args: {
     components: { NextButton, BackButton },
@@ -74,17 +87,31 @@ export const CustomButtons: Story = {
 
 export const NavigationMode: Story = {
   render: (args) => (
-    <Container>
-      <Carousel {...args}>
-        {Array.from({ length: 15 }).map((_, i) => (
-          <Item width={100} height={200} key={i}>
-            {i}
-          </Item>
-        ))}
-      </Carousel>
-    </Container>
+    <Carousel {...args}>
+      {Array.from({ length: 15 }).map((_, i) => (
+        <Item width={100} height={200} key={i}>
+          {i}
+        </Item>
+      ))}
+    </Carousel>
   ),
   args: {
     navigationMode: CarouselNavigationMode.always,
+  },
+};
+
+export const AutoPlay: Story = {
+  render: (args) => (
+    <Carousel {...args}>
+      {Array.from({ length: 15 }).map((_, i) => (
+        <Item width={100} height={200} key={i}>
+          {i}
+        </Item>
+      ))}
+    </Carousel>
+  ),
+  args: {
+    autoPlay: true,
+    autoPlayInterval: 1500,
   },
 };

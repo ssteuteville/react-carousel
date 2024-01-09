@@ -29,6 +29,9 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: pnpm-lock.yaml
 
+      - name: build
+        run: pnpm build
+
       - name: publish
         run: |
           pnpm --package=@semantic-release/changelog --package=@semantic-release/git --package=semantic-release@22 dlx semantic-release
